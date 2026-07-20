@@ -8,7 +8,7 @@ export async function salvarFilme(filme){
     `
 
     let resposta = await con.query(comando,[
-        filme.nome_filme,
+        filme.nome,
         filme.sinopse,
         filme.avaliacao,
         filme.lancamento,

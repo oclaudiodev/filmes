@@ -12,7 +12,6 @@ servidor.use(cors())
 
 rotas(servidor)
 
-
 const PORTA = process.env.PORT
 
 servidor.listen(

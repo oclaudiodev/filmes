@@ -1,17 +1,25 @@
 import { Router } from "express";
-import { salvarFilme } from "../repository/filmeRepository.js";
+import salvarFilmeService from "../service/filme/salvarFilmeService.js";
+
 
 const endpoints = Router()
 
-endpoints.post('/filme', async (req,resp)=>{
-    
-    let filme = req.body
+endpoints.post('/filme', async (req, resp) => {
 
-    let id = await salvarFilme(filme)
+    try {
+        let filme = req.body
+        let id = await salvarFilmeService(filme)
 
-    resp.send({
-        id: id
-    })
+        resp.send({
+            id: id
+        })
+
+    } catch (err) {
+        logErro(err)
+        resp.status(400).send(criarErro(err))
+    }
+
+
 })
 
 export default endpoints
