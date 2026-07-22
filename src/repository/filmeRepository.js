@@ -40,3 +40,26 @@ export async function consultarFilmes(nome) {
 
     return registros
 }
+
+export async function consultarFilmesPorID(id) {
+    let comando = `
+    select 
+      id_filme    id,
+      nm_filme    nome,
+      ds_sinopse   sinopse,
+      vl_avaliacao     avaliacao,
+      dt_lancamento     lancamento,
+      bt_disponivel      disponivel,
+      img_filme          imagem
+
+      from tb_filme
+    
+    where id_filme = ?
+    `
+
+    let resposta = await con.query(comando,[id])
+    
+    let regs = resposta[0]
+
+    return regs
+}
