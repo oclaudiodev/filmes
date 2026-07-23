@@ -25,3 +25,9 @@ export function validarFilmeUnico(registros){
     }
     
 }
+
+export function validarFilmeIgual(registros){
+    if(registros.length>0){
+        throw new Error("Já existe um filme cadastrado com esse nome")
+    }
+}
