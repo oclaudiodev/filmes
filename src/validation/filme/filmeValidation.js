@@ -31,3 +31,8 @@ export function validarFilmeIgual(registros){
         throw new Error("Já existe um filme cadastrado com esse nome")
     }
 }
+
+export function validarLinhasAfetadas(linhasAfetadas){
+    if ( linhasAfetadas == 0 )
+        throw new Error ("Nenhum filme alterado")
+}

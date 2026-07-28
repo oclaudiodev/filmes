@@ -2,6 +2,7 @@ import { Router } from "express";
 import salvarFilmeService from "../service/filme/salvarFilmeService.js";
 import consultarFilmesService from "../service/filme/consultarFilmesService.js";
 import { consultarFilmesPorIDService } from "../service/filme/consultarFilmePorIDService.js";
+import alterarFilmeService from "../service/filme/alterarFilmeService.js";
 
 const endpoints = Router()
 
@@ -27,8 +28,8 @@ endpoints.get('/filme', async (req, resp) => {
     try {
         let nome = req.query.nome
         let registros = await consultarFilmesService(nome)
-        
-        resp.send({registros})
+
+        resp.send({ registros })
 
     } catch (err) {
         logErro(err)
@@ -38,8 +39,8 @@ endpoints.get('/filme', async (req, resp) => {
 
 })
 
-endpoints.get('/filme/:id',async (req,resp)=>{
-    try{
+endpoints.get('/filme/:id', async (req, resp) => {
+    try {
         let id = req.params.id
 
         let registro = await consultarFilmesPorIDService(id)
@@ -47,10 +48,28 @@ endpoints.get('/filme/:id',async (req,resp)=>{
         resp.send(registro)
 
 
-    }catch(err){
+    } catch (err) {
         logErro(err)
         resp.status(400).send(criarErro(err))
     }
+
+})
+
+endpoints.put("/filme/:id", async (req, resp) => {
+    try {
+
+        let filmeObj = req.body
+        let id = req.params.id
+
+        await alterarFilmeService(filmeObj, id)
+
+        resp.status(204).send()
+
+    } catch (err) {
+        logErro(err)
+        resp.status(400).send(criarErro(err))
+    }
+
 
 })
 
