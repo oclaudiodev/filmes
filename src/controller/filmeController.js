@@ -3,6 +3,7 @@ import salvarFilmeService from "../service/filme/salvarFilmeService.js";
 import consultarFilmesService from "../service/filme/consultarFilmesService.js";
 import { consultarFilmesPorIDService } from "../service/filme/consultarFilmePorIDService.js";
 import alterarFilmeService from "../service/filme/alterarFilmeService.js";
+import deletarFilmeService from "../service/filme/deletarFilmeService.js";
 
 const endpoints = Router()
 
@@ -71,6 +72,21 @@ endpoints.put("/filme/:id", async (req, resp) => {
     }
 
 
+})
+
+endpoints.delete('/filme/:id',async (req,resp)=>{
+    try {
+    
+        let id = req.params.id
+        await deletarFilmeService(id)
+
+        resp.status(204).send()
+
+    } catch (err) {
+        logErro(err)
+        resp.status(400).send(criarErro(err))
+    }
+    
 })
 
 export default endpoints

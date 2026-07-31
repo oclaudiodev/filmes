@@ -100,3 +100,16 @@ export async function alterarFilme(filme, id){
 
     return linhasAfetadas
 }
+
+
+export async function deletarFilme(id){
+    let comando = 
+    `
+    delete from tb_filme where id_filme = ?
+    `
+
+    let resposta = await con.query(comando,[id])
+    let info = resposta[0]
+    let linhasAfetadas = info.affectedRows
+    return linhasAfetadas
+}
